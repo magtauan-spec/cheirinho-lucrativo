@@ -104,6 +104,12 @@
   .close{border:0;background:rgba(255,255,255,.08);color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:18px;flex:0 0 auto}
   .player-box{position:relative;width:100%;aspect-ratio:16/9;background:#000}
   .player-box iframe,.player-box video{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .player-box .novid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:linear-gradient(160deg,#3a1450,#1c0829)}
+  .player-box .novid .nv-ic{font-size:44px;margin-bottom:10px}
+  .player-box .novid b{font-size:16px;margin-bottom:6px;color:#fff}
+  .player-box .novid span{font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.5;max-width:300px}
+  .player-box .novid .nv-btn{text-decoration:none;font-weight:800;font-size:14px;color:#fff;padding:12px 22px;border-radius:999px;background:linear-gradient(180deg,var(--green1),var(--green2) 60%,var(--green3))}
+  .player-box .nv-help{position:absolute;left:0;right:0;bottom:0;text-align:center;padding:8px;font-size:12px;color:#fff;background:rgba(0,0,0,.55);text-decoration:none}
   .mp{padding:16px}
   .mp .big{font-size:22px;font-weight:800;text-align:center;margin:2px 0 2px}
   .mp .sub{font-size:13px;color:var(--muted);text-align:center;margin:0 0 14px;line-height:1.5}
@@ -149,6 +155,12 @@
       <div class="sec-head"><h3>🔓 Aulas premium</h3><span class="pill locked">libera na hora</span></div>
       <p class="sec-sub">As aulas avançadas, onde o lucro aumenta de verdade. Cada uma libera na hora por R$ 9,90.</p>
       <div id="lockedList"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head"><h3>🎁 Seus bônus incluídos</h3><span class="pill free">já é seu</span></div>
+      <p class="sec-sub">Os bônus que vêm junto pra você começar a ganhar sua renda extra hoje mesmo.</p>
+      <div id="bonusList"></div>
     </section>
 
     <section class="sec">
@@ -217,6 +229,17 @@ var CFG = {
     { id:"l5", icon:"📈", title:"Escala: de R$500 a R$3.000 por mês", sub:"Videoaula premium", price:9.90, type:"youtube", src:"", checkout:"" }
   ],
 
+  /* BÔNUS INCLUÍDOS (grátis, já liberados com a virada pra renda extra).
+     link: cole o link do material (Drive/PDF). Se deixar "", abre o WhatsApp pedindo o bônus. */
+  bonus: [
+    { id:"b1", emoji:"📦", title:"Lista de Fornecedores", desc:"Onde comprar essência, frasco e embalagem baratinho e de qualidade.", link:"" },
+    { id:"b2", emoji:"🏷️", title:"Tabela de Preços e Margem", desc:"Quanto cobrar em cada frasco e kit pra ter lucro de verdade.", link:"" },
+    { id:"b3", emoji:"📊", title:"Planilha de Controle de Vendas", desc:"Acompanhe pedidos, custos e lucro sem se perder.", link:"" },
+    { id:"b4", emoji:"💬", title:"Scripts de Vendas no WhatsApp", desc:"Mensagens prontas que transformam curiosa em cliente pagando.", link:"" },
+    { id:"b5", emoji:"📱", title:"Pack de Posts e Stories", desc:"Artes editáveis no Canva pra divulgar e vender todo dia.", link:"" },
+    { id:"b6", emoji:"👩‍❤️‍👩", title:"Grupo VIP de Alunas", desc:"Comunidade pra tirar dúvidas, trocar ideia e vender junto.", link:"" }
+  ],
+
   /* PRODUTOS / KITS (upsell). cor = gradiente da capa mockup. */
   products: [
     { id:"p1", emoji:"🧪", lab:"E-BOOK", title:"50 Fórmulas Premium", desc:"Contratipos de importados e os cheiros que mais vendem.", price:9.90, from:37, cor:"linear-gradient(160deg,#ec4899,#7c3aed)", checkout:"" },
@@ -257,14 +280,21 @@ document.getElementById('payCode').value=CFG.pixCode;
 
 /* ---- player no app ---- */
 var pModal=document.getElementById('playerModal'), pBox=document.getElementById('playerBox'), pTitle=document.getElementById('playerTitle');
+function waLink(msg){ return "https://wa.me/"+CFG.whatsapp+"?text="+encodeURIComponent(msg); }
 function playLesson(it){
-  if(!it.src){ showToast('🎬 Essa aula entra em breve. Me chama no WhatsApp 💜'); return; }
   pTitle.textContent=it.title;
+  if(!it.src){
+    pBox.innerHTML='<div class="novid"><div class="nv-ic">🎬</div><b>Essa aula já tá sendo preparada pra você</b>'+
+      '<span>Toca no botão que eu te mando o acesso agora mesmo 💜</span>'+
+      '<a class="nv-btn" target="_blank" rel="noopener" href="'+waLink("Oi! Quero assistir a aula: "+it.title)+'">💬 Liberar minha aula</a></div>';
+    pModal.classList.add('show'); return;
+  }
   if(it.type==='mp4'){
     pBox.innerHTML='<video controls autoplay playsinline src="'+it.src+'"></video>';
   } else {
     var yt='https://www.youtube-nocookie.com/embed/'+it.src+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
-    pBox.innerHTML='<iframe allow="autoplay; encrypted-media; fullscreen" allowfullscreen src="'+yt+'"></iframe>';
+    pBox.innerHTML='<iframe allow="autoplay; encrypted-media; fullscreen" allowfullscreen src="'+yt+'"></iframe>'+
+      '<a class="nv-help" target="_blank" rel="noopener" href="'+waLink("Oi! A aula "+it.title+" não abriu pra mim")+'">O vídeo não abriu? Toque aqui 💬</a>';
   }
   pModal.classList.add('show');
 }
@@ -320,6 +350,18 @@ function renderLocked(){
 }
 renderLocked();
 
+/* ---- render BÔNUS (incluídos / grátis) ---- */
+var bonusWrap=document.getElementById('bonusList');
+CFG.bonus.forEach(function(it){
+  var r=document.createElement('div'); r.className='row'; r.dataset.search=(it.title+' '+it.desc).toLowerCase();
+  r.innerHTML='<div class="ri">'+it.emoji+'</div><div class="rt"><b>'+it.title+'</b><small>'+it.desc+'</small></div><button class="act done">Abrir</button>';
+  r.querySelector('.act').addEventListener('click',function(){
+    if(it.link){ window.open(it.link,'_blank'); }
+    else { window.open(waLink("Oi! Quero receber meu bônus: "+it.title+" 💖"),'_blank'); }
+  });
+  bonusWrap.appendChild(r);
+});
+
 /* ---- render PRODUTOS ---- */
 var prodWrap=document.getElementById('prodList');
 function renderProds(){
@@ -341,7 +383,7 @@ renderProds();
 /* ---- busca ---- */
 document.getElementById('search').addEventListener('input',function(){
   var q=this.value.trim().toLowerCase();
-  document.querySelectorAll('#freeList .row, #lockedList .row, #prodList .prod').forEach(function(el){
+  document.querySelectorAll('#freeList .row, #lockedList .row, #bonusList .row, #prodList .prod').forEach(function(el){
     el.classList.toggle('hidden', q && el.dataset.search.indexOf(q)===-1);
   });
 });
