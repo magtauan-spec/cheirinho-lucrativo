@@ -111,6 +111,18 @@
   .player-box .novid .nv-btn{text-decoration:none;font-weight:800;font-size:14px;color:#fff;padding:12px 22px;border-radius:999px;background:linear-gradient(180deg,var(--green1),var(--green2) 60%,var(--green3))}
   .player-box .nv-help{position:absolute;left:0;right:0;bottom:0;text-align:center;padding:8px;font-size:12px;color:#fff;background:rgba(0,0,0,.55);text-decoration:none}
   .mp{padding:16px}
+  .mp-content{padding:16px 18px;font-size:14px;line-height:1.55}
+  .mp-content h4{margin:16px 0 6px;font-size:15px;color:#fff}
+  .mp-content h4:first-child{margin-top:2px}
+  .mp-content p{margin:0 0 10px;color:var(--muted)}
+  .mp-content ul{margin:0 0 10px;padding-left:18px;color:var(--muted)}
+  .mp-content li{margin-bottom:5px}
+  .mp-content b{color:#fff}
+  .mp-content table{width:100%;border-collapse:collapse;margin:0 0 12px;font-size:12.5px}
+  .mp-content th,.mp-content td{border:1px solid var(--card-b);padding:7px 9px;text-align:left}
+  .mp-content th{background:rgba(255,255,255,.06);color:#fff}
+  .mp-content .dl{display:inline-block;margin:4px 0 12px;background:linear-gradient(180deg,var(--pink1),var(--pink2));color:#fff;font-weight:800;padding:12px 18px;border-radius:12px;text-decoration:none;font-size:13.5px}
+  .mp-content .script{background:rgba(255,255,255,.04);border:1px solid var(--card-b);border-radius:10px;padding:10px 12px;margin:0 0 9px;font-size:13px;color:var(--ink);line-height:1.5}
   .mp .big{font-size:22px;font-weight:800;text-align:center;margin:2px 0 2px}
   .mp .sub{font-size:13px;color:var(--muted);text-align:center;margin:0 0 14px;line-height:1.5}
   .qr{display:block;width:210px;max-width:62%;margin:0 auto 12px;border-radius:14px;background:#fff;padding:10px}
@@ -182,6 +194,15 @@
     </div>
   </div>
 
+  <!-- CONTEÚDO / BÔNUS -->
+  <div class="ov" id="infoModal">
+    <div class="modal">
+      <div class="mh"><b id="infoTitle">Material</b><button class="close" data-close="infoModal">×</button></div>
+      <div class="mp-content" id="infoBody"></div>
+      <div class="mp"><button class="btn-gold" data-close="infoModal">✓ Fechar</button></div>
+    </div>
+  </div>
+
   <!-- PAGAMENTO -->
   <div class="ov" id="payModal">
     <div class="modal">
@@ -213,31 +234,81 @@ var CFG = {
   pixCode: "00020101021226360014br.gov.bcb.pix0114+551999519226752040000530398654049.905802BR5918TAUAN V S MONTEIRO6008CAMPINAS62130509CHEIRINHO63042168",
   pixQr: "data:image/png;base64,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",
 
-  /* As 3 videoaulas GRÁTIS. type: 'youtube' (use o ID do vídeo) ou 'mp4' (link direto do .mp4). */
+  /* As 3 videoaulas GRÁTIS (vídeos reais, já testados que abrem). */
   free: [
-    { id:"f1", icon:"🎬", title:"Aula 1 — Seu primeiro body splash", sub:"Videoaula · 8 min", type:"youtube", src:"q6K24iGQ9rQ" },
-    { id:"f2", icon:"🎬", title:"Aula 2 — Fixação: faça o cheiro durar", sub:"Videoaula · 6 min", type:"youtube", src:"LPlIPsQ3oUI" },
-    { id:"f3", icon:"🎬", title:"Aula 3 — Como precificar e começar a vender", sub:"Videoaula · 7 min", type:"youtube", src:"q6K24iGQ9rQ" }
+    { id:"f1", icon:"🎬", title:"Aula 1 — Body splash com 2 produtos (o jeito fácil)", sub:"Videoaula", type:"youtube", src:"CNRoSm_TEOk" },
+    { id:"f2", icon:"🎬", title:"Aula 2 — Seu body splash do zero", sub:"Videoaula", type:"youtube", src:"YX799Jg1v7s" },
+    { id:"f3", icon:"🎬", title:"Aula 3 — Base pronta x matéria-prima", sub:"Videoaula", type:"youtube", src:"Z3AWWGBNjCQ" }
   ],
 
   /* Aulas PREMIUM (travadas). price em reais. checkout: link do seu checkout (Cakto/Kiwify) OU deixe "" pra usar o Pix. */
   locked: [
-    { id:"l1", icon:"🕌", title:"Perfume Árabe em Casa", sub:"Videoaula premium", price:9.90, type:"youtube", src:"", checkout:"" },
-    { id:"l2", icon:"💅", title:"Cheirinho Viral — o que mais vende", sub:"Videoaula premium", price:9.90, type:"youtube", src:"", checkout:"" },
-    { id:"l3", icon:"✨", title:"Perfume importado (contratipo) passo a passo", sub:"Videoaula premium", price:9.90, type:"youtube", src:"", checkout:"" },
-    { id:"l4", icon:"💰", title:"Vendas no automático pelo WhatsApp", sub:"Videoaula premium", price:9.90, type:"youtube", src:"", checkout:"" },
-    { id:"l5", icon:"📈", title:"Escala: de R$500 a R$3.000 por mês", sub:"Videoaula premium", price:9.90, type:"youtube", src:"", checkout:"" }
+    { id:"l1", icon:"🕌", title:"Perfume árabe campeão de fixação", sub:"Videoaula avançada", price:9.90, type:"youtube", src:"uFjFrToqRkg", checkout:"" },
+    { id:"l2", icon:"💎", title:"Perfume com máxima concentração", sub:"Videoaula avançada", price:9.90, type:"youtube", src:"EBhzp5qQziw", checkout:"" },
+    { id:"l3", icon:"💥", title:"3 dicas pra fixar e projetar muito mais", sub:"Videoaula avançada", price:9.90, type:"youtube", src:"l8RQSHc8tHk", checkout:"" },
+    { id:"l4", icon:"✨", title:"Perfume com fixador caseiro", sub:"Videoaula avançada", price:9.90, type:"youtube", src:"u7e5mmgkMos", checkout:"" },
+    { id:"l5", icon:"💰", title:"Faça e venda: body splash iluminador", sub:"Videoaula avançada", price:9.90, type:"youtube", src:"JK4FlwQDvPQ", checkout:"" }
   ],
 
   /* BÔNUS INCLUÍDOS (grátis, já liberados com a virada pra renda extra).
      link: cole o link do material (Drive/PDF). Se deixar "", abre o WhatsApp pedindo o bônus. */
   bonus: [
-    { id:"b1", emoji:"📦", title:"Lista de Fornecedores", desc:"Onde comprar essência, frasco e embalagem baratinho e de qualidade.", link:"" },
-    { id:"b2", emoji:"🏷️", title:"Tabela de Preços e Margem", desc:"Quanto cobrar em cada frasco e kit pra ter lucro de verdade.", link:"" },
-    { id:"b3", emoji:"📊", title:"Planilha de Controle de Vendas", desc:"Acompanhe pedidos, custos e lucro sem se perder.", link:"" },
-    { id:"b4", emoji:"💬", title:"Scripts de Vendas no WhatsApp", desc:"Mensagens prontas que transformam curiosa em cliente pagando.", link:"" },
-    { id:"b5", emoji:"📱", title:"Pack de Posts e Stories", desc:"Artes editáveis no Canva pra divulgar e vender todo dia.", link:"" },
-    { id:"b6", emoji:"👩‍❤️‍👩", title:"Grupo VIP de Alunas", desc:"Comunidade pra tirar dúvidas, trocar ideia e vender junto.", link:"" }
+    { id:"b1", emoji:"📦", title:"Lista de Fornecedores", desc:"Onde comprar essência, frasco, base e rótulo.", html:`
+      <h4>🌸 Essências e contratipos</h4>
+      <p>Procure por <b>"essência para perfumaria / body splash"</b> (não é óleo essencial puro):</p>
+      <ul><li>Império das Essências, Mix Essências, Arte dos Aromas, Essência do Brasil</li>
+      <li>No Mercado Livre: Harmonia Aromas e lojas com +1.000 vendas e nota acima de 4,8</li></ul>
+      <h4>🧴 Base, álcool e fixador</h4>
+      <ul><li>Base pronta pra body splash, álcool de cereais 96°, propilenoglicol e fixador</li>
+      <li>Casas de produtos pra cosméticos e farmácias de manipulação</li></ul>
+      <h4>🫙 Frascos e sprays</h4>
+      <ul><li>Mike Embalagens, Plastpan, Fonte dos Frascos, Grupo Embalagens</li>
+      <li>No Magalu: busque "mini frascos" e "frasco spray vidro"</li></ul>
+      <h4>🏷️ Rótulos</h4>
+      <ul><li>Adesivos personalizados no Mercado Livre ou gráficas online (Printi)</li></ul>
+      <h4>✅ Antes de comprar (pra não cair em cilada)</h4>
+      <ul><li>Olhe reputação e avaliações recentes do vendedor</li>
+      <li>Peça amostra antes de comprar em quantidade</li>
+      <li>Comece com pouco, teste a qualidade e só então escale</li></ul>` },
+    { id:"b2", emoji:"🏷️", title:"Tabela de Preços e Margem", desc:"Quanto cobrar pra ter lucro de verdade.", html:`
+      <h4>💰 Custo x venda (frasco 100ml)</h4>
+      <table>
+        <tr><th>Item</th><th>Custo médio</th></tr>
+        <tr><td>Essência</td><td>R$ 2 – 4</td></tr>
+        <tr><td>Base / álcool</td><td>R$ 1 – 2</td></tr>
+        <tr><td>Frasco spray</td><td>R$ 1,50 – 3</td></tr>
+        <tr><td>Rótulo</td><td>R$ 0,30 – 0,80</td></tr>
+        <tr><th>Custo total</th><th>≈ R$ 5 – 10</th></tr>
+      </table>
+      <h4>🏷️ Preço sugerido</h4>
+      <ul><li>Unidade: <b>R$ 20 a R$ 35</b></li><li>Kit com 3: <b>R$ 55 a R$ 80</b></li></ul>
+      <p><b>Regra de ouro:</b> preço = custo × 3 a × 5. Sua margem fica entre 65% e 80%.</p>
+      <p>Em datas especiais (Natal, Dia das Mães) monte kits e cobre mais — o valor percebido sobe.</p>` },
+    { id:"b3", emoji:"📊", title:"Planilha de Controle de Vendas", desc:"Baixe e controle pedidos, custo e lucro.", html:`
+      <h4>📊 Controle suas vendas sem se perder</h4>
+      <p>Baixe a planilha, abra no Excel ou no Google Sheets e preencha a cada venda. O lucro é Preço − Custo.</p>
+      <a class="dl" download="controle-vendas-cheirinho.csv" href="data:text/csv;charset=utf-8,Data,Cliente,Produto,Qtd,Custo%20unit,Preco%20venda,Lucro%0A01/01,Maria,Body%20Splash%20Morango,1,7,25,18%0A,,,,,,%0A,,,,,,">⬇️ Baixar planilha (CSV)</a>
+      <h4>Como usar</h4>
+      <ul><li>Uma linha por venda</li><li>Preencha custo e preço — o lucro é a diferença</li>
+      <li>No fim do mês, some a coluna Lucro pra ver quanto ganhou</li></ul>` },
+    { id:"b4", emoji:"💬", title:"Scripts de Vendas no WhatsApp", desc:"Mensagens prontas que fecham venda.", html:`
+      <h4>💬 É só copiar e adaptar</h4>
+      <div class="script"><b>1. Abordagem</b><br>"Oi, linda! Tudo bem? 💖 Chegou coleção nova de body splash, aquele cheirinho que fixa o dia todo. Quer ver os cheiros disponíveis?"</div>
+      <div class="script"><b>2. Quebra do "tá caro"</b><br>"Entendo! Mas ó: é 100ml, fixa horas e sai mais barato que perfume de loja. E se não amar o cheiro, eu troco 💜"</div>
+      <div class="script"><b>3. Fechamento</b><br>"Posso separar o seu? Hoje ainda consigo entregar. Prefere 1 ou leva o kit com 3 que fica mais em conta?"</div>
+      <div class="script"><b>4. Pós-venda (recompra)</b><br>"Oi! Seu body splash já tá acabando? 😍 Chegou cheiro novo essa semana, quer dar uma olhada?"</div>
+      <div class="script"><b>5. Indicação</b><br>"Que bom que amou! 🥰 Se indicar pra uma amiga, te dou R$5 de desconto na próxima 💕"</div>` },
+    { id:"b5", emoji:"📱", title:"Posts e Stories prontos", desc:"Legendas e ideias pra postar e vender.", html:`
+      <h4>📱 Legendas prontas</h4>
+      <div class="script"><b>Post 1</b><br>"Aquele cheirinho que todo mundo pergunta: 'nossa, que perfume é esse?' 😍 Body splash que fixa o dia todo. Chama no direct 💌"</div>
+      <div class="script"><b>Post 2</b><br>"Renda extra de verdade: feito em casa, vendido no zap 💰 Quer começar? Me chama."</div>
+      <div class="script"><b>Post 3</b><br>"Kit presente que encanta e cabe no bolso 🎁 Perfeito pra presentear (ou se presentear 😅)."</div>
+      <h4>📸 Ideias de Story</h4>
+      <ul><li>Bastidor: você fazendo e embalando (gera desejo)</li>
+      <li>Enquete: "Qual cheiro você prefere: doce ou amadeirado?"</li>
+      <li>Prova social: print de cliente elogiando</li>
+      <li>Oferta do dia com contador "só até hoje"</li></ul>` },
+    { id:"b6", emoji:"👩‍❤️‍👩", title:"Grupo VIP de Alunas", desc:"Entre pra comunidade e tire dúvidas.", link:"WA" }
   ],
 
   /* PRODUTOS / KITS (upsell). cor = gradiente da capa mockup. */
@@ -293,8 +364,7 @@ function playLesson(it){
     pBox.innerHTML='<video controls autoplay playsinline src="'+it.src+'"></video>';
   } else {
     var yt='https://www.youtube-nocookie.com/embed/'+it.src+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
-    pBox.innerHTML='<iframe allow="autoplay; encrypted-media; fullscreen" allowfullscreen src="'+yt+'"></iframe>'+
-      '<a class="nv-help" target="_blank" rel="noopener" href="'+waLink("Oi! A aula "+it.title+" não abriu pra mim")+'">O vídeo não abriu? Toque aqui 💬</a>';
+    pBox.innerHTML='<iframe allow="autoplay; encrypted-media; fullscreen" allowfullscreen src="'+yt+'"></iframe>';
   }
   pModal.classList.add('show');
 }
@@ -352,12 +422,14 @@ renderLocked();
 
 /* ---- render BÔNUS (incluídos / grátis) ---- */
 var bonusWrap=document.getElementById('bonusList');
+function openInfo(it){ document.getElementById('infoTitle').textContent=it.title; document.getElementById('infoBody').innerHTML=it.html; document.getElementById('infoModal').classList.add('show'); }
 CFG.bonus.forEach(function(it){
   var r=document.createElement('div'); r.className='row'; r.dataset.search=(it.title+' '+it.desc).toLowerCase();
   r.innerHTML='<div class="ri">'+it.emoji+'</div><div class="rt"><b>'+it.title+'</b><small>'+it.desc+'</small></div><button class="act done">Abrir</button>';
   r.querySelector('.act').addEventListener('click',function(){
-    if(it.link){ window.open(it.link,'_blank'); }
-    else { window.open(waLink("Oi! Quero receber meu bônus: "+it.title+" 💖"),'_blank'); }
+    if(it.link==='WA'){ window.open(waLink("Oi! Quero entrar no Grupo VIP das Alunas do Cheirinho Lucrativo 💖"),'_blank'); }
+    else if(it.link){ window.open(it.link,'_blank'); }
+    else { openInfo(it); }
   });
   bonusWrap.appendChild(r);
 });
