@@ -60,6 +60,7 @@
   .pill.free{background:rgba(34,197,94,.15);color:#86efac}
   .pill.locked{background:rgba(255,211,110,.14);color:var(--gold)}
   .sec-sub{margin:0 2px 12px;font-size:13.5px;line-height:1.5;color:var(--muted)}
+  .cta-plan{display:block;width:100%;border:0;cursor:pointer;font-family:inherit;font-weight:800;font-size:15px;color:#3a1033;border-radius:14px;padding:14px;margin:0 0 12px;background:linear-gradient(180deg,#ffe08a,var(--gold));box-shadow:0 10px 22px rgba(255,211,110,.3)}
 
   .row{display:flex;align-items:center;gap:11px;padding:12px;border-radius:13px;background:var(--card);border:1px solid var(--card-b);margin-top:9px}
   .row.lock{border-style:dashed}
@@ -164,8 +165,9 @@
     </section>
 
     <section class="sec">
-      <div class="sec-head"><h3>🔓 Aulas premium</h3><span class="pill locked">libera na hora</span></div>
-      <p class="sec-sub">As aulas avançadas, onde o lucro aumenta de verdade. Cada uma libera na hora por R$ 9,90.</p>
+      <div class="sec-head"><h3>🔓 Aulas premium</h3><span class="pill locked">plano R$ 29,90</span></div>
+      <p class="sec-sub">Um plano só libera <b>todas</b> as aulas avançadas de uma vez — nada de pagar uma a uma.</p>
+      <button class="cta-plan hidden" id="ctaAulas">🔓 Liberar TODAS as aulas — R$ 29,90</button>
       <div id="lockedList"></div>
     </section>
 
@@ -176,8 +178,9 @@
     </section>
 
     <section class="sec">
-      <div class="sec-head"><h3>🛍️ Materiais e kits</h3><span class="pill locked">upgrade</span></div>
-      <p class="sec-sub">Materiais prontos pra acelerar suas vendas. Escolhe o que faz sentido pra você.</p>
+      <div class="sec-head"><h3>🛍️ Materiais e kits</h3><span class="pill locked">plano R$ 29,90</span></div>
+      <p class="sec-sub">Um plano libera <b>todos</b> os materiais e kits de uma vez.</p>
+      <button class="cta-plan hidden" id="ctaProd">🔓 Liberar TODOS os materiais — R$ 29,90</button>
       <div class="grid" id="prodList"></div>
     </section>
   </div>
@@ -208,7 +211,7 @@
     <div class="modal">
       <div class="mh"><b id="payTitle">Liberar material</b><button class="close" data-close="payModal">×</button></div>
       <div class="mp">
-        <div class="big" id="payPrice">R$ 9,90</div>
+        <div class="big" id="payPrice">R$ 29,90</div>
         <p class="sub" id="paySub">Pague pelo Pix abaixo e seu material libera na hora. 💜</p>
         <a class="btn-gold" id="payCheckout" href="#" target="_blank" rel="noopener" style="margin-bottom:12px">⚡ Pagar e liberar automático</a>
         <div id="pixWrap">
@@ -216,7 +219,7 @@
           <div class="copybox"><input id="payCode" readonly value=""><button id="copyBtn">Copiar</button></div>
           <div class="steps">
             <b>Como pagar:</b><br>1. Copie o código ou leia o QR no app do banco.<br>
-            2. Confirme o valor de <b>R$ 9,90</b> (chave: <b>19 99519-2267</b>).<br>
+            2. Confirme o valor de <b>R$ 29,90</b> (chave: <b>19 99519-2267</b>).<br>
             3. Me mande o comprovante no WhatsApp que eu libero na hora. 💜
           </div>
           <button class="btn-ghost" id="paidBtn">Já paguei — me manda meu acesso</button>
@@ -231,8 +234,12 @@ var CFG = {
   whatsapp: "5519995192267",
   whatsappMsg: "Oi! Quero liberar minhas aulas do Cheirinho Lucrativo 💖",
   pixKeyLabel: "19 99519-2267",
-  pixCode: "00020101021226360014br.gov.bcb.pix0114+551999519226752040000530398654049.905802BR5918TAUAN V S MONTEIRO6008CAMPINAS62130509CHEIRINHO63042168",
-  pixQr: "data:image/png;base64,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",
+  pixCode: "00020101021226360014br.gov.bcb.pix0114+5519995192267520400005303986540529.905802BR5918TAUAN V S MONTEIRO6008CAMPINAS62130509CHEIRINHO63043694",
+  pixQr: "data:image/png;base64,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",
+  planPrice: 29.90,
+  /* Links de checkout dos planos (Cakto/Kiwify...). Deixe "" pra usar o Pix. */
+  checkoutAulas: "",
+  checkoutProd: "",
 
   /* As 3 videoaulas GRÁTIS (vídeos reais, já testados que abrem). */
   free: [
@@ -331,13 +338,17 @@ function showToast(m){ toast.textContent=m; toast.classList.add('show'); clearTi
 var UNLOCK_KEY="cl_unlocked_v1";
 function getUnlocked(){ try{ return JSON.parse(localStorage.getItem(UNLOCK_KEY)||"[]"); }catch(e){ return []; } }
 function saveUnlocked(a){ try{ localStorage.setItem(UNLOCK_KEY, JSON.stringify(a)); }catch(e){} }
-function isUnlocked(id){ var u=getUnlocked(); return u.indexOf("all")>=0 || u.indexOf(id)>=0; }
+function isUnlocked(id,group){ var u=getUnlocked(); return u.indexOf("all")>=0 || (group&&u.indexOf(group)>=0) || u.indexOf(id)>=0; }
 function unlock(ids){ var u=getUnlocked(); ids.forEach(function(x){ if(u.indexOf(x)<0) u.push(x); }); saveUnlocked(u); }
 
-/* libera via link: ?unlock=all  ou  ?unlock=l1,p2 (usado no retorno do checkout e pras clientes que já pagaram) */
+/* links: ?unlock=all | aulas | produtos  (libera pras clientes que pagaram / retorno do checkout)
+          ?reset  (volta tudo pro estado travado — útil pra você pré-visualizar como o lead vê) */
 (function(){
   try{
-    var p=new URLSearchParams(location.search).get('unlock');
+    var sp=new URLSearchParams(location.search);
+    if(sp.has('reset')){ localStorage.removeItem(UNLOCK_KEY); history.replaceState(null,'',location.pathname);
+      setTimeout(function(){ showToast('🔒 Pré-visualização travada (como o lead vê)'); },400); return; }
+    var p=sp.get('unlock');
     if(p){ unlock(p.split(',').map(function(s){return s.trim();}).filter(Boolean));
       history.replaceState(null,'',location.pathname);
       setTimeout(function(){ showToast('✅ Acesso liberado! Aproveite, meu amor 💖'); },400);
@@ -380,6 +391,10 @@ function openPay(item){
   else { co.classList.add('hidden'); document.getElementById('paySub').textContent='Pague pelo Pix abaixo e me mande o comprovante que eu libero na hora. 💜'; }
   payModal.classList.add('show');
 }
+function openPayBundle(group){
+  if(group==='aulas') openPay({title:'Todas as aulas avançadas', price:CFG.planPrice, checkout:CFG.checkoutAulas});
+  else openPay({title:'Todos os materiais e kits', price:CFG.planPrice, checkout:CFG.checkoutProd});
+}
 document.getElementById('copyBtn').addEventListener('click',function(){
   var i=document.getElementById('payCode'); i.select(); i.setSelectionRange(0,99999);
   try{ navigator.clipboard.writeText(i.value); }catch(e){ document.execCommand('copy'); }
@@ -408,16 +423,19 @@ document.getElementById('heroPlay').addEventListener('click',function(){ playLes
 var lockedWrap=document.getElementById('lockedList');
 function renderLocked(){
   lockedWrap.innerHTML='';
+  var anyLocked=false;
   CFG.locked.forEach(function(it){
-    var ok=isUnlocked(it.id);
+    var ok=isUnlocked(it.id,'aulas'); if(!ok) anyLocked=true;
     var r=document.createElement('div'); r.className='row'+(ok?'':' lock'); r.dataset.search=(it.title+' '+it.sub).toLowerCase();
     var btn = ok ? '<button class="act play">▶ Assistir</button>'
-                 : '<button class="act buy">🔓 '+money(it.price)+'</button>';
+                 : '<button class="act buy">🔓 R$ 29,90</button>';
     r.innerHTML='<div class="ri">'+it.icon+'</div><div class="rt"><b>'+it.title+'</b><small>'+(ok?'Liberado ✓':it.sub)+'</small></div>'+btn;
-    r.querySelector('.act').addEventListener('click',function(){ ok?playLesson(it):openPay(it); });
+    r.querySelector('.act').addEventListener('click',function(){ ok?playLesson(it):openPayBundle('aulas'); });
     lockedWrap.appendChild(r);
   });
+  var cta=document.getElementById('ctaAulas'); cta.classList.toggle('hidden', !anyLocked);
 }
+document.getElementById('ctaAulas').addEventListener('click',function(){ openPayBundle('aulas'); });
 renderLocked();
 
 /* ---- render BÔNUS (incluídos / grátis) ---- */
@@ -438,18 +456,21 @@ CFG.bonus.forEach(function(it){
 var prodWrap=document.getElementById('prodList');
 function renderProds(){
   prodWrap.innerHTML='';
+  var anyLocked=false;
   CFG.products.forEach(function(it){
-    var ok=isUnlocked(it.id);
+    var ok=isUnlocked(it.id,'produtos'); if(!ok) anyLocked=true;
     var d=document.createElement('div'); d.className='prod'; d.dataset.search=(it.title+' '+it.desc).toLowerCase();
     d.innerHTML=
       '<div class="cover" style="background:'+it.cor+'"><div class="lab">'+it.lab+'</div><div class="emoji">'+it.emoji+'</div><div class="cname">'+it.title+'</div></div>'+
       '<h4>'+it.title+'</h4><p>'+it.desc+'</p>'+
-      '<div class="price"><s>'+money(it.from)+'</s> '+money(it.price)+'</div>'+
-      '<button class="buy'+(ok?' done':'')+'">'+(ok?'✓ Liberado':'Quero esse')+'</button>';
-    d.querySelector('.buy').addEventListener('click',function(){ ok?showToast('💖 Esse já é seu! Me chama no WhatsApp que te mando.'):openPay(it); });
+      '<div class="price">'+(ok?'✓ Liberado':'No plano de R$ 29,90')+'</div>'+
+      '<button class="buy'+(ok?' done':'')+'">'+(ok?'✓ Liberado':'🔓 Liberar')+'</button>';
+    d.querySelector('.buy').addEventListener('click',function(){ ok?showToast('💖 Esse já é seu! Aproveite 💜'):openPayBundle('produtos'); });
     prodWrap.appendChild(d);
   });
+  document.getElementById('ctaProd').classList.toggle('hidden', !anyLocked);
 }
+document.getElementById('ctaProd').addEventListener('click',function(){ openPayBundle('produtos'); });
 renderProds();
 
 /* ---- busca ---- */
