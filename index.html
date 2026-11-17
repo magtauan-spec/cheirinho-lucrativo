@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cheirinho Lucrativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#2a0e3d;--ink:#fff5fb;--muted:#e2c4e6;--muted2:#c9a9d6;
+    --card:rgba(255,255,255,.045);--card-b:rgba(255,255,255,.09);
+    --pink1:#f9a8d4;--pink2:#ec4899;--pink3:#f472b6;
+    --green1:#34d673;--green2:#22c55e;--green3:#1eae5a;
+    --gold:#ffd36e;--radius:16px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(900px 520px at 85% -120px, rgba(236,72,153,.45) 0%, rgba(0,0,0,0) 60%),
+      radial-gradient(800px 600px at -10% 10%, rgba(147,51,234,.45) 0%, rgba(0,0,0,0) 60%),
+      linear-gradient(180deg,#2a0e3d 0%, #230b34 60%, #1c0829 100%);
+    background-attachment:fixed;min-height:100vh;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:20px 16px 130px}
+  .top{display:flex;align-items:center;gap:12px;margin:6px 2px 18px}
+  .logo{width:46px;height:46px;flex:0 0 auto;border-radius:14px;display:grid;place-items:center;font-size:22px;
+    background:linear-gradient(145deg,var(--pink1),var(--pink2) 55%,#db2777);box-shadow:0 8px 20px rgba(236,72,153,.35)}
+  .brand h1{font-size:19px;line-height:1.1;margin:0;font-weight:800}
+  .brand span{font-size:12.5px;color:var(--muted);font-weight:500}
+  .tag-vip{margin-left:auto;font-size:11.5px;font-weight:800;color:#3a1033;padding:7px 12px;border-radius:999px;
+    background:linear-gradient(145deg,#ffe08a,var(--gold));box-shadow:0 6px 16px rgba(255,211,110,.35);white-space:nowrap}
+
+  .hero{background:var(--card);border:1px solid var(--card-b);border-radius:var(--radius);padding:18px;margin-bottom:16px;box-shadow:0 14px 30px rgba(0,0,0,.28)}
+  .hero h2{margin:2px 0 8px;font-size:21px;font-weight:800}
+  .hero p{margin:0 0 14px;font-size:14.5px;line-height:1.5;color:var(--muted)}
+  .video{position:relative;border-radius:14px;overflow:hidden;background:#000;aspect-ratio:16/10;box-shadow:0 10px 24px rgba(0,0,0,.35);cursor:pointer;display:block;border:0;width:100%;padding:0}
+  .video .poster{position:absolute;inset:0;background:
+      radial-gradient(120% 120% at 70% 20%, rgba(249,168,212,.55), rgba(0,0,0,0) 55%),
+      radial-gradient(120% 120% at 20% 90%, rgba(147,51,234,.6), rgba(0,0,0,0) 55%),
+      linear-gradient(160deg,#3a1450,#1c0829);display:grid;place-items:center;font-size:58px}
+  .video .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.42);backdrop-filter:blur(2px);border:2px solid rgba(255,255,255,.85);color:#fff;font-size:24px;padding-left:5px}
+  .video .cap{position:absolute;left:10px;bottom:10px;font-size:12px;font-weight:600;color:#fff;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);padding:7px 11px;border-radius:10px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;cursor:pointer;font-weight:700;font-size:15px;color:#fff;border-radius:14px;padding:14px 16px;margin-top:12px;font-family:inherit;text-decoration:none}
+  .btn-pink{background:linear-gradient(180deg,var(--pink3),var(--pink2) 60%,#db2777);box-shadow:0 10px 22px rgba(236,72,153,.35)}
+  .note{margin:12px 2px 0;font-size:13px;line-height:1.5;color:var(--muted2)}
+
+  .search{position:relative;margin:18px 0 8px}
+  .search input{width:100%;border:1px solid var(--card-b);background:rgba(255,255,255,.05);color:var(--ink);border-radius:14px;padding:14px 14px 14px 42px;font-size:14.5px;font-family:inherit;outline:none}
+  .search input::placeholder{color:var(--muted2)}
+  .search .ic{position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.8}
+
+  .sec{margin-top:24px}
+  .sec-head{display:flex;align-items:center;gap:10px;margin:0 2px 4px}
+  .sec-head h3{margin:0;font-size:18px;font-weight:800}
+  .pill{font-size:11.5px;font-weight:700;padding:6px 11px;border-radius:999px;margin-left:auto;white-space:nowrap}
+  .pill.free{background:rgba(34,197,94,.15);color:#86efac}
+  .pill.locked{background:rgba(255,211,110,.14);color:var(--gold)}
+  .sec-sub{margin:0 2px 12px;font-size:13.5px;line-height:1.5;color:var(--muted)}
+
+  .row{display:flex;align-items:center;gap:11px;padding:12px;border-radius:13px;background:var(--card);border:1px solid var(--card-b);margin-top:9px}
+  .row.lock{border-style:dashed}
+  .row .ri{width:42px;height:42px;flex:0 0 auto;border-radius:11px;display:grid;place-items:center;font-size:19px;background:linear-gradient(145deg,rgba(249,168,212,.25),rgba(236,72,153,.22));border:1px solid rgba(255,255,255,.08)}
+  .row.lock .ri{background:rgba(255,255,255,.05)}
+  .row .rt{flex:1;min-width:0}
+  .row .rt b{display:block;font-size:14px;font-weight:700;line-height:1.25}
+  .row .rt small{font-size:11.5px;color:var(--muted2)}
+  .act{border:0;cursor:pointer;font-family:inherit;font-weight:800;font-size:12.5px;color:#fff;padding:10px 15px;border-radius:999px;white-space:nowrap}
+  .act.play{background:linear-gradient(180deg,var(--pink1),var(--pink2))}
+  .act.buy{background:linear-gradient(180deg,#ffe08a,var(--gold));color:#3a1033}
+  .act.done{background:rgba(34,197,94,.18);color:#86efac}
+
+  /* produtos upsell */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+  .prod{background:var(--card);border:1px solid var(--card-b);border-radius:16px;padding:12px;display:flex;flex-direction:column}
+  .cover{position:relative;border-radius:12px;aspect-ratio:3/4;display:grid;place-items:center;text-align:center;padding:12px;overflow:hidden;box-shadow:0 10px 22px rgba(0,0,0,.35);margin-bottom:10px}
+  .cover .lab{position:absolute;top:8px;left:8px;font-size:9.5px;font-weight:800;letter-spacing:.5px;color:#fff;background:rgba(0,0,0,.35);padding:4px 8px;border-radius:999px}
+  .cover .emoji{font-size:40px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4))}
+  .cover .cname{position:absolute;left:0;right:0;bottom:0;padding:10px 8px;font-size:12.5px;font-weight:800;line-height:1.15;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.6))}
+  .prod h4{margin:0 0 3px;font-size:13.5px;font-weight:700;line-height:1.2}
+  .prod p{margin:0 0 10px;font-size:11.5px;color:var(--muted2);line-height:1.4;flex:1}
+  .prod .price{font-size:13px;font-weight:800;color:var(--gold);margin-bottom:8px}
+  .prod .price s{color:var(--muted2);font-weight:600;font-size:11px;margin-right:5px}
+  .prod .buy{width:100%;border:0;cursor:pointer;font-family:inherit;font-weight:800;font-size:12.5px;color:#3a1033;padding:11px;border-radius:12px;background:linear-gradient(180deg,#ffe08a,var(--gold))}
+  .prod .buy.done{background:rgba(34,197,94,.18);color:#86efac}
+
+  .dock{position:fixed;left:0;right:0;bottom:0;padding:14px 16px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(28,8,41,0),rgba(28,8,41,.75) 35%,rgba(28,8,41,.95));z-index:40}
+  .dock .inner{max-width:680px;margin:0 auto}
+  .wa{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;text-decoration:none;font-weight:800;font-size:16px;color:#fff;border-radius:18px;padding:16px;background:linear-gradient(180deg,var(--green1),var(--green2) 60%,var(--green3));box-shadow:0 12px 26px rgba(34,197,94,.4)}
+
+  .toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(20px);background:rgba(20,6,30,.96);border:1px solid rgba(255,255,255,.12);color:#fff;padding:12px 16px;border-radius:13px;font-size:13.5px;font-weight:600;max-width:88%;text-align:center;opacity:0;pointer-events:none;transition:.28s;z-index:120;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .hidden{display:none !important}
+
+  /* modais */
+  .ov{position:fixed;inset:0;background:rgba(8,2,14,.82);backdrop-filter:blur(4px);z-index:100;display:none;align-items:center;justify-content:center;padding:16px}
+  .ov.show{display:flex}
+  .modal{width:100%;max-width:560px;background:linear-gradient(180deg,#34124a,#220b32);border:1px solid var(--card-b);border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,.6);overflow:hidden;max-height:92vh;overflow-y:auto}
+  .modal .mh{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--card-b)}
+  .modal .mh b{font-size:15px;font-weight:800;flex:1;line-height:1.2}
+  .close{border:0;background:rgba(255,255,255,.08);color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:18px;flex:0 0 auto}
+  .player-box{position:relative;width:100%;aspect-ratio:16/9;background:#000}
+  .player-box iframe,.player-box video{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .mp{padding:16px}
+  .mp .big{font-size:22px;font-weight:800;text-align:center;margin:2px 0 2px}
+  .mp .sub{font-size:13px;color:var(--muted);text-align:center;margin:0 0 14px;line-height:1.5}
+  .qr{display:block;width:210px;max-width:62%;margin:0 auto 12px;border-radius:14px;background:#fff;padding:10px}
+  .copybox{display:flex;gap:8px;align-items:stretch;margin-bottom:10px}
+  .copybox input{flex:1;min-width:0;border:1px solid var(--card-b);background:rgba(255,255,255,.05);color:var(--ink);border-radius:11px;padding:11px;font-size:12px;font-family:inherit}
+  .copybox button{border:0;cursor:pointer;font-family:inherit;font-weight:800;font-size:12.5px;color:#fff;padding:0 15px;border-radius:11px;background:linear-gradient(180deg,var(--pink1),var(--pink2))}
+  .steps{font-size:12.5px;color:var(--muted);line-height:1.6;background:rgba(255,255,255,.04);border:1px solid var(--card-b);border-radius:12px;padding:12px 14px;margin:4px 0 12px}
+  .steps b{color:#fff}
+  .btn-gold{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;cursor:pointer;font-weight:800;font-size:15px;color:#3a1033;border-radius:14px;padding:14px;font-family:inherit;text-decoration:none;background:linear-gradient(180deg,#ffe08a,var(--gold));box-shadow:0 10px 22px rgba(255,211,110,.3)}
+  .btn-ghost{display:block;text-align:center;width:100%;margin-top:10px;color:var(--muted);font-size:12.5px;text-decoration:underline;background:none;border:0;cursor:pointer;font-family:inherit}
+  @media (max-width:420px){.hero h2{font-size:19px}.brand h1{font-size:17px}.grid{gap:10px}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="logo">💧</div>
+      <div class="brand"><h1>Cheirinho Lucrativo</h1><span>Área da Aluna</span></div>
+      <div class="tag-vip" id="vipTag">💖 VIP</div>
+    </div>
+
+    <section class="hero">
+      <h2 id="greet">Olá, meu amor 👋💖</h2>
+      <p>Que bom te ver aqui! Começa pela <b>primeira videoaula</b> do body splash — é a mais fácil de fazer e de vender. Suas aulas abrem aqui dentro do app. 💜</p>
+      <button class="video" id="heroVideo" aria-label="Assistir primeira aula">
+        <div class="poster">🧴✨</div><div class="play">▶</div>
+        <div class="cap">▶ Aula 1 · Seu primeiro body splash</div>
+      </button>
+      <button class="btn btn-pink" id="heroPlay">▶ Assistir a primeira aula</button>
+      <p class="note">Assista com calma. Qualquer dúvida é só tocar no botão verde e me chamar no WhatsApp. 💜</p>
+    </section>
+
+    <div class="search"><span class="ic">🔎</span><input id="search" type="text" placeholder="Buscar aula ou material (ex: árabe, vendas, etiquetas)"></div>
+
+    <section class="sec">
+      <div class="sec-head"><h3>🎬 Suas aulas liberadas</h3><span class="pill free">grátis pra ver</span></div>
+      <p class="sec-sub">As 3 primeiras videoaulas pra você já começar hoje. Toca em assistir que abre aqui dentro.</p>
+      <div id="freeList"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head"><h3>🔓 Aulas premium</h3><span class="pill locked">libera na hora</span></div>
+      <p class="sec-sub">As aulas avançadas, onde o lucro aumenta de verdade. Cada uma libera na hora por R$ 9,90.</p>
+      <div id="lockedList"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head"><h3>🛍️ Materiais e kits</h3><span class="pill locked">upgrade</span></div>
+      <p class="sec-sub">Materiais prontos pra acelerar suas vendas. Escolhe o que faz sentido pra você.</p>
+      <div class="grid" id="prodList"></div>
+    </section>
+  </div>
+
+  <div class="dock"><div class="inner"><a class="wa" id="waBtn" href="#" target="_blank" rel="noopener">💬 Falar comigo no WhatsApp</a></div></div>
+  <div class="toast" id="toast"></div>
+
+  <!-- PLAYER -->
+  <div class="ov" id="playerModal">
+    <div class="modal">
+      <div class="mh"><b id="playerTitle">Aula</b><button class="close" data-close="playerModal">×</button></div>
+      <div class="player-box" id="playerBox"></div>
+      <div class="mp"><button class="btn-gold" data-close="playerModal">✓ Fechar e voltar</button></div>
+    </div>
+  </div>
+
+  <!-- PAGAMENTO -->
+  <div class="ov" id="payModal">
+    <div class="modal">
+      <div class="mh"><b id="payTitle">Liberar material</b><button class="close" data-close="payModal">×</button></div>
+      <div class="mp">
+        <div class="big" id="payPrice">R$ 9,90</div>
+        <p class="sub" id="paySub">Pague pelo Pix abaixo e seu material libera na hora. 💜</p>
+        <a class="btn-gold" id="payCheckout" href="#" target="_blank" rel="noopener" style="margin-bottom:12px">⚡ Pagar e liberar automático</a>
+        <div id="pixWrap">
+          <img class="qr" id="payQr" alt="QR Code Pix" src="">
+          <div class="copybox"><input id="payCode" readonly value=""><button id="copyBtn">Copiar</button></div>
+          <div class="steps">
+            <b>Como pagar:</b><br>1. Copie o código ou leia o QR no app do banco.<br>
+            2. Confirme o valor de <b>R$ 9,90</b> (chave: <b>19 99519-2267</b>).<br>
+            3. Me mande o comprovante no WhatsApp que eu libero na hora. 💜
+          </div>
+          <button class="btn-ghost" id="paidBtn">Já paguei — me manda meu acesso</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ======================= EDITE AQUI ======================= */
+var CFG = {
+  whatsapp: "5519995192267",
+  whatsappMsg: "Oi! Quero liberar minhas aulas do Cheirinho Lucrativo 💖",
+  pixKeyLabel: "19 99519-2267",
+  pixCode: "00020101021226360014br.gov.bcb.pix0114+551999519226752040000530398654049.905802BR5918TAUAN V S MONTEIRO6008CAMPINAS62130509CHEIRINHO63042168",
+  pixQr: "data:image/png;base64,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",
+
+  /* As 3 videoaulas GRÁTIS. type: 'youtube' (use o ID do vídeo) ou 'mp4' (link direto do .mp4). */
+  free: [
+    { id:"f1", icon:"🎬", title:"Aula 1 — Seu primeiro body splash", sub:"Videoaula · 8 min", type:"youtube", src:"q6K24iGQ9rQ" },
+    { id:"f2", icon:"🎬", title:"Aula 2 — Fixação: faça o cheiro durar", sub:"Videoaula · 6 min", type:"youtube", src:"LPlIPsQ3oUI" },
+    { id:"f3", icon:"🎬", title:"Aula 3 — Como precificar e começar a vender", sub:"Videoaula · 7 min", type:"youtube", src:"q6K24iGQ9rQ" }
+  ],
+
+  /* Aulas PREMIUM (travadas). price em reais. checkout: link do seu checkout (Cakto/Kiwify) OU deixe "" pra usar o Pix. */
+  locked: [
+    { id:"l1", icon:"🕌", title:"Perfume Árabe em Casa", sub:"Videoaula premium", price:9.90, type:"youtube", src:"", checkout:"" },
+    { id:"l2", icon:"💅", title:"Cheirinho Viral — o que mais vende", sub:"Videoaula premium", price:9.90, type:"youtube", src:"", checkout:"" },
+    { id:"l3", icon:"✨", title:"Perfume importado (contratipo) passo a passo", sub:"Videoaula premium", price:9.90, type:"youtube", src:"", checkout:"" },
+    { id:"l4", icon:"💰", title:"Vendas no automático pelo WhatsApp", sub:"Videoaula premium", price:9.90, type:"youtube", src:"", checkout:"" },
+    { id:"l5", icon:"📈", title:"Escala: de R$500 a R$3.000 por mês", sub:"Videoaula premium", price:9.90, type:"youtube", src:"", checkout:"" }
+  ],
+
+  /* PRODUTOS / KITS (upsell). cor = gradiente da capa mockup. */
+  products: [
+    { id:"p1", emoji:"🧪", lab:"E-BOOK", title:"50 Fórmulas Premium", desc:"Contratipos de importados e os cheiros que mais vendem.", price:9.90, from:37, cor:"linear-gradient(160deg,#ec4899,#7c3aed)", checkout:"" },
+    { id:"p2", emoji:"📦", lab:"GUIA", title:"Fornecedores Secretos", desc:"Onde comprar essência e frasco baratinho e com qualidade.", price:9.90, from:27, cor:"linear-gradient(160deg,#f59e0b,#db2777)", checkout:"" },
+    { id:"p3", emoji:"🏷️", lab:"KIT CANVA", title:"Rótulos e Etiquetas", desc:"Modelos editáveis no Canva pra deixar seu produto profissional.", price:9.90, from:29, cor:"linear-gradient(160deg,#06b6d4,#7c3aed)", checkout:"" },
+    { id:"p4", emoji:"💬", lab:"KIT", title:"Scripts de Venda", desc:"Mensagens prontas de WhatsApp que transformam curiosa em cliente.", price:9.90, from:24, cor:"linear-gradient(160deg,#22c55e,#0891b2)", checkout:"" },
+    { id:"p5", emoji:"🧮", lab:"FERRAMENTA", title:"Calculadora de Lucro", desc:"Saiba o preço e o lucro de cada frasco em segundos.", price:9.90, from:19, cor:"linear-gradient(160deg,#a855f7,#ec4899)", checkout:"" },
+    { id:"p6", emoji:"🎀", lab:"E-BOOK", title:"Kits e Presentes", desc:"Como montar kits que vendem mais caro em datas especiais.", price:9.90, from:27, cor:"linear-gradient(160deg,#f472b6,#f59e0b)", checkout:"" }
+  ]
+};
+/* ========================================================= */
+
+var money = function(v){ return "R$ " + v.toFixed(2).replace(".",","); };
+var toast = document.getElementById('toast'), tT;
+function showToast(m){ toast.textContent=m; toast.classList.add('show'); clearTimeout(tT); tT=setTimeout(function(){toast.classList.remove('show');},2800); }
+
+/* ---- estado de desbloqueio (por aparelho) ---- */
+var UNLOCK_KEY="cl_unlocked_v1";
+function getUnlocked(){ try{ return JSON.parse(localStorage.getItem(UNLOCK_KEY)||"[]"); }catch(e){ return []; } }
+function saveUnlocked(a){ try{ localStorage.setItem(UNLOCK_KEY, JSON.stringify(a)); }catch(e){} }
+function isUnlocked(id){ var u=getUnlocked(); return u.indexOf("all")>=0 || u.indexOf(id)>=0; }
+function unlock(ids){ var u=getUnlocked(); ids.forEach(function(x){ if(u.indexOf(x)<0) u.push(x); }); saveUnlocked(u); }
+
+/* libera via link: ?unlock=all  ou  ?unlock=l1,p2 (usado no retorno do checkout e pras clientes que já pagaram) */
+(function(){
+  try{
+    var p=new URLSearchParams(location.search).get('unlock');
+    if(p){ unlock(p.split(',').map(function(s){return s.trim();}).filter(Boolean));
+      history.replaceState(null,'',location.pathname);
+      setTimeout(function(){ showToast('✅ Acesso liberado! Aproveite, meu amor 💖'); },400);
+    }
+  }catch(e){}
+})();
+
+document.getElementById('waBtn').href="https://wa.me/"+CFG.whatsapp+"?text="+encodeURIComponent(CFG.whatsappMsg);
+document.getElementById('payQr').src=CFG.pixQr;
+document.getElementById('payCode').value=CFG.pixCode;
+
+/* ---- player no app ---- */
+var pModal=document.getElementById('playerModal'), pBox=document.getElementById('playerBox'), pTitle=document.getElementById('playerTitle');
+function playLesson(it){
+  if(!it.src){ showToast('🎬 Essa aula entra em breve. Me chama no WhatsApp 💜'); return; }
+  pTitle.textContent=it.title;
+  if(it.type==='mp4'){
+    pBox.innerHTML='<video controls autoplay playsinline src="'+it.src+'"></video>';
+  } else {
+    var yt='https://www.youtube-nocookie.com/embed/'+it.src+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    pBox.innerHTML='<iframe allow="autoplay; encrypted-media; fullscreen" allowfullscreen src="'+yt+'"></iframe>';
+  }
+  pModal.classList.add('show');
+}
+function closePlayer(){ pBox.innerHTML=''; pModal.classList.remove('show'); }
+
+/* ---- modal de pagamento ---- */
+var payModal=document.getElementById('payModal');
+function openPay(item){
+  document.getElementById('payTitle').textContent='Liberar: '+item.title;
+  document.getElementById('payPrice').textContent=money(item.price);
+  var co=document.getElementById('payCheckout');
+  if(item.checkout){ co.href=item.checkout; co.classList.remove('hidden'); document.getElementById('paySub').textContent='Toque em pagar: a compra é confirmada e libera automático. Ou use o Pix abaixo.'; }
+  else { co.classList.add('hidden'); document.getElementById('paySub').textContent='Pague pelo Pix abaixo e me mande o comprovante que eu libero na hora. 💜'; }
+  payModal.classList.add('show');
+}
+document.getElementById('copyBtn').addEventListener('click',function(){
+  var i=document.getElementById('payCode'); i.select(); i.setSelectionRange(0,99999);
+  try{ navigator.clipboard.writeText(i.value); }catch(e){ document.execCommand('copy'); }
+  showToast('📋 Código Pix copiado!');
+});
+document.getElementById('paidBtn').addEventListener('click',function(){
+  window.open("https://wa.me/"+CFG.whatsapp+"?text="+encodeURIComponent("Acabei de pagar! Segue o comprovante pra liberar meu acesso 💖"),'_blank');
+});
+
+/* fechar modais */
+document.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click',function(){ var id=b.getAttribute('data-close'); if(id==='playerModal') closePlayer(); else document.getElementById(id).classList.remove('show'); }); });
+document.querySelectorAll('.ov').forEach(function(ov){ ov.addEventListener('click',function(e){ if(e.target===ov){ if(ov.id==='playerModal') closePlayer(); else ov.classList.remove('show'); } }); });
+
+/* ---- render FREE ---- */
+var freeWrap=document.getElementById('freeList');
+CFG.free.forEach(function(it){
+  var r=document.createElement('div'); r.className='row'; r.dataset.search=(it.title+' '+it.sub).toLowerCase();
+  r.innerHTML='<div class="ri">'+it.icon+'</div><div class="rt"><b>'+it.title+'</b><small>'+it.sub+'</small></div><button class="act play">▶ Assistir</button>';
+  r.querySelector('.act').addEventListener('click',function(){ playLesson(it); });
+  freeWrap.appendChild(r);
+});
+document.getElementById('heroVideo').addEventListener('click',function(){ playLesson(CFG.free[0]); });
+document.getElementById('heroPlay').addEventListener('click',function(){ playLesson(CFG.free[0]); });
+
+/* ---- render LOCKED ---- */
+var lockedWrap=document.getElementById('lockedList');
+function renderLocked(){
+  lockedWrap.innerHTML='';
+  CFG.locked.forEach(function(it){
+    var ok=isUnlocked(it.id);
+    var r=document.createElement('div'); r.className='row'+(ok?'':' lock'); r.dataset.search=(it.title+' '+it.sub).toLowerCase();
+    var btn = ok ? '<button class="act play">▶ Assistir</button>'
+                 : '<button class="act buy">🔓 '+money(it.price)+'</button>';
+    r.innerHTML='<div class="ri">'+it.icon+'</div><div class="rt"><b>'+it.title+'</b><small>'+(ok?'Liberado ✓':it.sub)+'</small></div>'+btn;
+    r.querySelector('.act').addEventListener('click',function(){ ok?playLesson(it):openPay(it); });
+    lockedWrap.appendChild(r);
+  });
+}
+renderLocked();
+
+/* ---- render PRODUTOS ---- */
+var prodWrap=document.getElementById('prodList');
+function renderProds(){
+  prodWrap.innerHTML='';
+  CFG.products.forEach(function(it){
+    var ok=isUnlocked(it.id);
+    var d=document.createElement('div'); d.className='prod'; d.dataset.search=(it.title+' '+it.desc).toLowerCase();
+    d.innerHTML=
+      '<div class="cover" style="background:'+it.cor+'"><div class="lab">'+it.lab+'</div><div class="emoji">'+it.emoji+'</div><div class="cname">'+it.title+'</div></div>'+
+      '<h4>'+it.title+'</h4><p>'+it.desc+'</p>'+
+      '<div class="price"><s>'+money(it.from)+'</s> '+money(it.price)+'</div>'+
+      '<button class="buy'+(ok?' done':'')+'">'+(ok?'✓ Liberado':'Quero esse')+'</button>';
+    d.querySelector('.buy').addEventListener('click',function(){ ok?showToast('💖 Esse já é seu! Me chama no WhatsApp que te mando.'):openPay(it); });
+    prodWrap.appendChild(d);
+  });
+}
+renderProds();
+
+/* ---- busca ---- */
+document.getElementById('search').addEventListener('input',function(){
+  var q=this.value.trim().toLowerCase();
+  document.querySelectorAll('#freeList .row, #lockedList .row, #prodList .prod').forEach(function(el){
+    el.classList.toggle('hidden', q && el.dataset.search.indexOf(q)===-1);
+  });
+});
+</script>
+</body>
+</html>
